@@ -262,7 +262,7 @@ main()
 uploaded_file = st.sidebar.file_uploader("Escolha um arquivo CSV", type="csv")
 
 # Define o caminho do arquivo da imagem que será exibida no aplicativo
-imagem_rotulo_app = "Varig_Logo.png"
+imagem_rotulo_app = "Varig_logo.png"
 
 st.markdown("---")
 
