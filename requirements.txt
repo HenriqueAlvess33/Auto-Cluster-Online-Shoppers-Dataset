@@ -4,3 +4,4 @@ pandas-datareader==0.10.0
 pillow==11.1.0
 scikit-learn==1.6.1
 seaborn==0.13.2
+streamlit==1.45.1
