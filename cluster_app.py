@@ -10,7 +10,6 @@ from sklearn.decomposition import PCA  # Análise de Componentes Principais
 from sklearn.preprocessing import StandardScaler  # Normalização de dados
 from sklearn.cluster import KMeans  # Algoritmo de agrupamento K-Means
 from sklearn.metrics import silhouette_score  # Métrica de avaliação de agrupamentos
-from sklearn.utils import resample
 
 
 def main():
@@ -372,12 +371,6 @@ if uploaded_file is not None:
         # Lista para armazenar os scores de silhueta de cada solução de agrupamento
         silhuette_scores_pca = []
 
-        # Amostra os dados se forem grandes
-        if len(df_pca) > 1000:
-            df_amostra = resample(df_pca, n_samples=1000, random_state=42)
-        else:
-            df_amostra = df_pca.copy()
-
         # Número máximo de clusters a ser testado
         max_clusters = st.number_input(
             "Defina o número máximo de clusters",
@@ -398,8 +391,7 @@ if uploaded_file is not None:
             # Ajusta o modelo aos dados transformados pelo PCA
             kmeans.fit(df_pca)
             # Calcula e armazena o índice de silhueta
-            # silhuette_scores_pca.append(silhouette_score(df_pca, kmeans.labels_))
-            silhouette_score(df_amostra, kmeans.predict(df_amostra))
+            silhuette_scores_pca.append(silhouette_score(df_pca, kmeans.labels_))
             # Cria nomes para os grupos (ex: Grupo_0, Grupo_1, ...)
             nomes_grupos = [f"Grupo_{i}" for i in range(n_clusters)]
             # Adiciona ao DataFrame os rótulos dos grupos (como números)
