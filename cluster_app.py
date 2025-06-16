@@ -361,12 +361,6 @@ if uploaded_file is not None:
     col1, col2, col3 = st.columns([1, 2, 1])
     col2.markdown("## Análise de diferentes modelos de agrupamento")
 
-    # Amostra os dados se forem grandes
-    if len(df_pca) > 1000:
-        df_amostra = resample(df_pca, n_samples=1000, random_state=42)
-    else:
-        df_amostra = df_pca.copy()
-
     if st.checkbox(
         "Faça a avaliação de múltiplos modelos de agrupamento, para definir qual o melhor sucedido"
     ):
@@ -377,6 +371,12 @@ if uploaded_file is not None:
 
         # Lista para armazenar os scores de silhueta de cada solução de agrupamento
         silhuette_scores_pca = []
+
+        # Amostra os dados se forem grandes
+        if len(df_pca) > 1000:
+            df_amostra = resample(df_pca, n_samples=1000, random_state=42)
+        else:
+            df_amostra = df_pca.copy()
 
         # Número máximo de clusters a ser testado
         max_clusters = st.number_input(
